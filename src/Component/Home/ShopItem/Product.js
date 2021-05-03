@@ -3,8 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom'
 import * as action from '../../../Action/UserCart/index';
-import * as ActionLoading from '../../../Action/Loading/index'
+import * as ActionLoading from '../../../Action/Loading/index';
+import ImageZoom from 'react-medium-image-zoom';
+import 'react-slideshow-image/dist/styles.css'
 function Product(props) {
+    const [zoom , setZoom] = useState();
     const [chose , setChose] = useState('Image1');
     const dispatch = useDispatch()
     const token =  JSON.parse(localStorage.getItem("token"));
@@ -28,7 +31,9 @@ function Product(props) {
         Size,
         Stock
     } = productDetail
-    console.log(productDetail)
+    useEffect(()=>{
+        setZoom(Image1);
+    }, []);
     const Click = (id)=>{
          const temp = value.state  + id;
          if(temp >= 0){
@@ -61,9 +66,10 @@ function Product(props) {
         var choseImage = document.getElementById('choseimage');
         choose.style.border = 'none';
         choseImage.src = clickImage.src;
+        setZoom(clickImage.src);
         clickImage.style.border= '2px solid red';
         setChose(e.target.id);
-      }
+      } 
      
     }
     return (
@@ -84,12 +90,24 @@ function Product(props) {
                       <label>HÌNH ẢNH SẢN PHẨM</label>
                     </div>
                     <div className="product-item  md-height bg-gray d-block" style={{backgroundColor : '#ccc', borderRadius : '5px' , padding : '0' ,position : 'relative'}}>
-                            <img src={Image1} id="choseimage" alt="Image" style={{borderRadius : '5px'}} />
-            
+                            
+                         
+                        {/* <img src={Image1} id="choseimage" alt="Image" style={{borderRadius : '5px'}} /> */}
+                        <ImageZoom
+                            image={{
+                                src: Image1,
+                                className: 'img',
+                                id : 'choseimage',
+                           
+                            }}
+                            zoomImage={{
+                                src: {zoom}
+                            }}
+                        />
                     </div>
                     <div style={{display : 'flex', flexDirection : 'column' ,position : 'absolute' ,left : '25px' , top : '95px'}}>
                             <img onClick={onClick} id="Image1" src={Image1} alt="Image" style={{borderRadius : '5px' , width : '80px', marginTop : '10px' , cursor : 'pointer' , border : '2px solid red' }}/>
-                            <img onClick={onClick}  id="Image2" src={Image2} alt="Image" style={{borderRadius : '5px' , width : '80px' , marginTop : '10px' , cursor : 'pointer'}}/>
+                            <img onClick={onClick} id="Image2" src={Image2} alt="Image" style={{borderRadius : '5px' , width : '80px' , marginTop : '10px' , cursor : 'pointer'}}/>
                             <img onClick={onClick} id="Image3" src={Image3} alt="Image" style={{borderRadius : '5px' , width : '80px' , marginTop : '10px' , cursor : 'pointer'}}/>
                     </div>
                 </div>
