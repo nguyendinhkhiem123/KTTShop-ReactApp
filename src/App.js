@@ -24,7 +24,8 @@ import AddProduct from './Component/Auth/AddProduct';
 import AdminProductPage from './page/AdminPage/AdminProductPage';
 import EditProduct from './Component/Auth/EditProduct';
 import AddAdvens from './Component/Auth/AddAdvens';
-
+import AdminOrderDetailPage from './page/AdminPage/AdminOrderDetailPage';
+import OrderDetailPage from './page/HomePage/OderDetail';
 import {
   BrowserRouter as Router ,
   Switch,
@@ -58,7 +59,7 @@ function App() {
              <Route path="/thank"  render={()=>{
                 return localStorage.getItem("token")  ?   <Thank></Thank>  : <Redirect to="/signin"></Redirect>
                }}></Route>
-              <Route path="/order"  render={()=>{
+              <Route path="/order" exact render={()=>{
                   return localStorage.getItem("token")  ?  <OrderPage></OrderPage> : <Redirect to="/signin"></Redirect>
              }}></Route>
             
@@ -75,10 +76,12 @@ function App() {
               <Route path="/admin/advens" exact render={()=>{
                  return localStorage.getItem("token")  ?  <AdminAdvenrtismentPage></AdminAdvenrtismentPage> : <Redirect to="/signin"></Redirect>
              }}></Route>
-              <Route path="/admin/order" render={()=>{
+              <Route path="/admin/order" exact render={()=>{
                  return localStorage.getItem("token")  ?  <AdminOrderPage></AdminOrderPage> : <Redirect to="/signin"></Redirect>
              }}></Route>
-
+                <Route path="/admin/order/:slug"  render={()=>{
+                 return localStorage.getItem("token")  ?  <AdminOrderDetailPage></AdminOrderDetailPage> : <Redirect to="/signin"></Redirect>
+             }}></Route>
               <Route path="/admin/tk" render={()=>{
                  return localStorage.getItem("token")  ?  <AdminTkPage></AdminTkPage> : <Redirect to="/signin"></Redirect>
              }}></Route>
@@ -94,7 +97,9 @@ function App() {
                  return localStorage.getItem("token")  ?  <AddAdvens></AddAdvens> : <Redirect to="/signin"></Redirect>
              }}></Route> */}
              {/* Route chung */}
-           
+             <Route path="/order/:slug" render={()=>{
+                 return localStorage.getItem("token") ? <OrderDetailPage></OrderDetailPage>: <Redirect to="/"></Redirect> 
+             }}></Route>
              <Route path="/signup" render={()=>{
                  return localStorage.getItem("token") ? <Redirect to="/"></Redirect> : <SignUp></SignUp>
              }}></Route>

@@ -40,7 +40,9 @@ function CartPage(props) {
                 <div className="row">
                    <Voucher></Voucher> 
                    <Totals >{totals}</Totals>
-                </div></div>}
+                </div>
+                
+            </div>}
                
             </div>
             </div>

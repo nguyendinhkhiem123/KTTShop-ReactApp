@@ -6,6 +6,7 @@ import OrderCart from './OrderOfUser';
 import AdminOrder from './OrderOfAdmin';
 import AdminAdvens from './AdminAdvens';
 import Loading from './Loading';
+import OrderDetail from './CommonsOrderDetail'
 const myReducers = combineReducers({
     Product,
     ProductDetail,
@@ -13,6 +14,7 @@ const myReducers = combineReducers({
     OrderCart,
     AdminOrder,
     AdminAdvens,
-    Loading
+    Loading,
+    OrderDetail
 });
 export default myReducers;
