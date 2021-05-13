@@ -29,8 +29,6 @@ function Item(props) {
                         </h2>
                     {discount === 0 ? <strong className="item-price">${price}</strong> :  <strong className="item-price">  <del>${price}<span></span></del>  ${price - price*discount}<span></span></strong>}
               </div>
-         
-             
           </div>
     );
 }

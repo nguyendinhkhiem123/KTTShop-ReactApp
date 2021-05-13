@@ -9,6 +9,11 @@ import { useDispatch } from 'react-redux';
 import * as ActionLoading from '../../Action/Loading/index';
 function EditProduct(props) {
     const [option , setOption] = useState([])
+    const [image , setImage] = useState({   // Lưu ảnh hiện thị
+        image1 : '',
+        image2 : '',
+        image3 : ''
+    })
     const token = JSON.parse(localStorage.getItem("token"));
     const history = useHistory();
     const match = useRouteMatch();
@@ -59,6 +64,11 @@ function EditProduct(props) {
                     Description :Product.Description,
                     Information : Product.Information,
                     Stock : Product.Stock
+                })
+                setImage({
+                    image1 : Product.Image1,
+                    image2 : Product.Image2,
+                    image3 : Product.Image3
                 })
             })
             axios.get('http://jewelrystoreservice.somee.com/api/allProductGroups')
@@ -117,71 +127,112 @@ function EditProduct(props) {
         
         
     }
-    const onChangeFile =(e)=>{
-        console.log(e.target.files[0]);
+    const toBase64 = (file) =>{
+        return new Promise((resolve , reject) =>{
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+    const onChangeFile =async (e)=>{
         const formData = new FormData();
-        formData.append("file",e.target.files[0])   
+        const resFile = await toBase64(e.target.files[0]); // chuyển base 64
+        formData.append("file",resFile);   
         formData.append("upload_preset","jy6ujik2");
         dispatch(ActionLoading.displayLoading());
         // setTimeout(() => {
         //     dispatch(ActionLoading.hiddenLoading());
         // }, 500);
-        axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
-            .then(res =>{
-                console.log(res);
-                setForm({
-                    ...form ,
-                    Image1 : res.data.url
-                })
-                dispatch(ActionLoading.hiddenLoading());
-            })
-            .catch(err=>{
-                console.log(err);
-            })
+        // axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
+        //     .then(res =>{
+        //         console.log(res);
+        //         setImage({
+        //             ...image ,
+        //             image1 : res.data.url
+        //         })
+        //        
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData);
+        setImage({
+            ...image ,
+            image1 : res.data.url
+        })
+        const finalResFile =  resFile.slice(23,resFile.length);
+        setForm({
+            ...form ,
+            Image1 : finalResFile
+        })
+        dispatch(ActionLoading.hiddenLoading());
     }
-    const onChangeFile2 =(e)=>{
-        // console.log(e.target.files[0]);
-         const formData = new FormData();
-         formData.append("file",e.target.files[0])   
-         formData.append("upload_preset","jy6ujik2");
-         dispatch(ActionLoading.displayLoading());
-        //  setTimeout(() => {
-        //      dispatch(ActionLoading.hiddenLoading());
-        //  }, 500);
-         axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
-             .then(res =>{
-                 console.log(res);
-                 setForm({
-                     ...form ,
-                     Image2 : res.data.url
-                 })
-                 dispatch(ActionLoading.hiddenLoading());
-             })
-             .catch(err=>{
-                 console.log(err);
-             })
+    const onChangeFile2 = async (e)=>{
+        const formData = new FormData();
+        const resFile = await toBase64(e.target.files[0]); // chuyển base 64
+        formData.append("file",resFile);   
+        formData.append("upload_preset","jy6ujik2");
+        dispatch(ActionLoading.displayLoading());
+        // setTimeout(() => {
+        //     dispatch(ActionLoading.hiddenLoading());
+        // }, 500);
+        // axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
+        //     .then(res =>{
+        //         console.log(res);
+        //         setImage({
+        //             ...image ,
+        //             image1 : res.data.url
+        //         })
+        //        
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData);
+        setImage({
+            ...image ,
+            image2 : res.data.url
+        })
+        const finalResFile =  resFile.slice(23,resFile.length);
+        setForm({
+            ...form ,
+            Image2 : finalResFile
+        })
+        dispatch(ActionLoading.hiddenLoading());
      }
-     const onChangeFile3 =(e)=>{
-        // console.log(e.target.files[0]);
-         const formData = new FormData();
-         formData.append("file",e.target.files[0])   
-         formData.append("upload_preset","jy6ujik2");
-         dispatch(ActionLoading.displayLoading());
-        //  setTimeout(() => {
-        //      dispatch(ActionLoading.hiddenLoading());
-        //  }, 500);
-         axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
-             .then(res =>{
-                 console.log(res);
-                 setForm({
-                     ...form ,
-                     Image3 : res.data.url
-                 })
-                 dispatch(ActionLoading.hiddenLoading());
-             })
-             .catch(err=>{
-                 console.log(err);
-             })
+     const onChangeFile3 = async (e)=>{
+        const formData = new FormData();
+        const resFile = await toBase64(e.target.files[0]); // chuyển base 64
+        formData.append("file",resFile);   
+        formData.append("upload_preset","jy6ujik2");
+        dispatch(ActionLoading.displayLoading());
+        // setTimeout(() => {
+        //     dispatch(ActionLoading.hiddenLoading());
+        // }, 500);
+        // axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData)
+        //     .then(res =>{
+        //         console.log(res);
+        //         setImage({
+        //             ...image ,
+        //             image1 : res.data.url
+        //         })
+        //        
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dw59ze6aa/image/upload", formData);
+        setImage({
+            ...image ,
+            image3 : res.data.url
+        })
+        const finalResFile =  resFile.slice(23,resFile.length);
+        setForm({
+            ...form ,
+            Image3: finalResFile
+        })
+        dispatch(ActionLoading.hiddenLoading());
      }
      var ele = option.map(value =>{
         return (
@@ -242,7 +293,7 @@ function EditProduct(props) {
                                 <div className="modal__signin-form">
                                     <i className="modal__signin-form__warnning"> Hình ảnh 1</i>
                                     <div>
-                                        <img id="img" src={form.Image1}style={{marginTop : "10px",
+                                        <img id="img" src={image.image1}style={{marginTop : "10px",
                                             marginBottom : "10px",
                                             width : "20%"
 
@@ -255,7 +306,7 @@ function EditProduct(props) {
                                 <div className="modal__signin-form">
                                     <i className="modal__signin-form__warnning"> Hình ảnh 2</i>
                                     <div>
-                                        <img id="img" src={form.Image2}style={{marginTop : "10px",
+                                        <img id="img" src={image.image2}style={{marginTop : "10px",
                                             marginBottom : "10px",
                                             width : '20%'
                                             }}
@@ -267,7 +318,7 @@ function EditProduct(props) {
                                 <div className="modal__signin-form">
                                     <i className="modal__signin-form__warnning"> Hình ảnh 3</i>
                                     <div>
-                                        <img id="img" src={form.Image3}style={{marginTop : "10px",
+                                        <img id="img" src={image.image3}style={{marginTop : "10px",
                                             marginBottom : "10px",
                                             width : '20%'
                                             }}

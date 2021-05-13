@@ -66,6 +66,7 @@ function Content(props) {
              </Item>
         }
  });
+ 
     return (
       <div className="site-section">
         <div className="container">
@@ -94,11 +95,16 @@ function Content(props) {
                                   </select> 
                               </div>
                     </div>
-                    <div style={{marginLeft : '30px'}} >
+                    {/* <div style={{marginLeft : '30px'}} >
                         THÔNG TIN SẢN PHẨM
-                   </div>
+                   </div> */}
                     </div>
                 </div>
+                  <div className="row">
+              <div className="title-section mb-5 col-12">
+                <h2 className="text-uppercase">Sản phẩm chúng tôi</h2>
+              </div>
+            </div>
               <div className="row mb-5">
                    {list.length === 0 ? <h2>Không có sản phẩm cần tìm</h2> : element}
               </div>

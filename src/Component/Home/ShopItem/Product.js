@@ -137,7 +137,7 @@ function Product(props) {
                     <div className="input-group-prepend">
                         <div className="btn btn-outline-primary js-btn-minus" onClick={e=>Click(-1)}>−</div>
                     </div>
-                    <input type="text" className="form-control text-center" defaultValue={value.state} value={value.state} placeholder aria-label="Example text with button addon" aria-describedby="button-addon1" readOnly />
+                    <input type="text" className="form-control text-center" defaultValue={value.state} value={value.state}  placeholder aria-label="Example text with button addon" aria-describedby="button-addon1" readOnly />
                     <div className="input-group-append">
                         <div className="btn btn-outline-primary js-btn-plus" onClick={e=>Click(1)}  >+</div>
                     </div>
