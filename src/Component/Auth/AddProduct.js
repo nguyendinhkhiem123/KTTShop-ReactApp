@@ -139,10 +139,11 @@ function AddProduct(props) {
             ...image ,
             image1 : res.data.url
         })
-        //const finalResFile =  resFile.slice(23,resFile.length);
+        var int = resFile.search(",") + 1;
+        const finalResFile =  resFile.slice(int ,resFile.length);
         setForm({
             ...form ,
-            Image1 : resFile
+            Image1 : finalResFile
         })
         dispatch(ActionLoading.hiddenLoading());
        
@@ -173,7 +174,8 @@ function AddProduct(props) {
             ...image ,
             image2 : res.data.url
         })
-        const finalResFile =  resFile.slice(23,resFile.length);
+        var int = resFile.search(",") + 1;
+        const finalResFile =  resFile.slice(int ,resFile.length);
         setForm({
             ...form ,
             Image2 : finalResFile
@@ -207,7 +209,8 @@ function AddProduct(props) {
             ...image ,
             image3 : res.data.url
         })
-        const finalResFile =  resFile.slice(23,resFile.length);
+        var int = resFile.search(",") + 1;
+        const finalResFile =  resFile.slice(int ,resFile.length);
         setForm({
             ...form ,
             Image3 : finalResFile
