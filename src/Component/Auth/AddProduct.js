@@ -139,10 +139,10 @@ function AddProduct(props) {
             ...image ,
             image1 : res.data.url
         })
-        const finalResFile =  resFile.slice(23,resFile.length);
+        //const finalResFile =  resFile.slice(23,resFile.length);
         setForm({
             ...form ,
-            Image1 : finalResFile
+            Image1 : resFile
         })
         dispatch(ActionLoading.hiddenLoading());
        
@@ -272,9 +272,9 @@ function AddProduct(props) {
                                 <div className="modal__signin-form">
                                     <i className="modal__signin-form__warnning">(*): Hình ảnh 1</i>
                                     <div>
-                                        <img id="img" src={image.image1}style={{marginTop : "10px",
+                                        <img id="img" src={image.image1} style={{marginTop : "10px",
                                             marginBottom : "10px",
-                                         
+                                            width : "20%"
                                             }}
                                         ></img>
                                     </div>
@@ -286,7 +286,7 @@ function AddProduct(props) {
                                     <div>
                                         <img id="img" src={image.image2}style={{marginTop : "10px",
                                             marginBottom : "10px",
-                                         
+                                            width : "20%"
                                             }}
                                         ></img>
                                     </div>
@@ -298,7 +298,7 @@ function AddProduct(props) {
                                     <div>
                                         <img id="img" src={image.image3}style={{marginTop : "10px",
                                             marginBottom : "10px",
-                                         
+                                            width : "20%"
                                             }}
                                         ></img>
                                     </div>
